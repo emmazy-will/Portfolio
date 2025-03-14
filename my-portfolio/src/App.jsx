@@ -434,38 +434,44 @@ function App() {
       </div>
     </section>
     <footer className="bg-dark text-white py-4 mt-5">
-      <div className="container text-center">
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
-          {/* Contact Info */}
-          <div className='text'>
-            <h5>Contact Me</h5>
-            <div className="d-flex gap-3 justify-content-center justify-content-md-start">
-              <Mail size={16} /> <span>youremail@example.com</span>
-              <Phone size={16} /> <span>+123 456 7890</span>
-              <MapPin size={16} /> <span>Your City, Country</span>
+        <div className="container text-center">
+          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
+            {/* Contact Info */}
+            <div className="text mb-4 mb-md-0">
+              <h5>Contact Me</h5>
+              <div className="d-flex flex-column gap-2 align-items-center align-items-md-start">
+                <div className="d-flex align-items-center gap-2">
+                  <Mail size={16} /> <span>youremail@example.com</span>
+                </div>
+                <div className="d-flex align-items-center gap-2">
+                  <Phone size={16} /> <span>+123 456 7890</span>
+                </div>
+                <div className="d-flex align-items-center gap-2">
+                  <MapPin size={16} /> <span>Your City, Country</span>
+                </div>
+              </div>
             </div>
-          </div>
 
-          {/* Social Links */}
-          <div>
-            <h5>Follow Me</h5>
-            <div className="d-flex gap-3">
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-white">
-                <Github size={24} />
-              </a>
-              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="text-white">
-                <Linkedin size={24} />
-              </a>
-              <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-white">
-                <Twitter size={24} />
-              </a>
+            {/* Social Links */}
+            <div>
+              <h5>Follow Me</h5>
+              <div className="d-flex gap-3 justify-content-center">
+                <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-white">
+                  <Github size={24} />
+                </a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="text-white">
+                  <Linkedin size={24} />
+                </a>
+                <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-white">
+                  <Twitter size={24} />
+                </a>
+              </div>
             </div>
           </div>
+          <hr className="border-light" />
+          <p className="mb-0">&copy; {new Date().getFullYear()} Your Name. All Rights Reserved.</p>
         </div>
-        <hr className="border-light" />
-        <p className="mb-0">&copy; {new Date().getFullYear()} Your Name. All Rights Reserved.</p>
-      </div>
-    </footer>
+      </footer>
     </div>
   );
 }

@@ -486,3 +486,35 @@ i {
     margin-left: -40px;
   }
 }
+@media (max-width: 375px) {
+  #pro-one, #pro-two {
+    height: 120px;
+    margin-top: 20px;
+    padding-top: 5px;
+    margin-left: 80;
+  }
+  @keyframes borderColorChange {
+    0% { border-color: rgb(37, 75, 156); }
+    25% { border-color: rgb(95, 139, 193); }
+    50% { border-color: rgb(9, 121, 226); }
+    75% { border-color: rgb(21, 24, 84); }
+    100% { border-color: rgb(8, 165, 226); }
+  }
+  .image-boder{
+    border: 15px solid rgb(225, 255, 0);
+    width: 20%;
+    margin-top: 50px;
+    height: 80%;
+    animation: borderColorChange 4s infinite;
+  }
+  #pro-one {
+    height: 150px;
+    margin-top: 40px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -40px;
+  }
+}
+
