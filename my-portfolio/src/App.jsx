@@ -1,7 +1,7 @@
 import { Menu } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import me from "./images/king.jpg"
+import mee from "./images/me.jpg"
 import view from "./images/row.png"
 import manage from "./images/task.png"
 import { ArrowRight } from 'lucide-react';
@@ -165,7 +165,7 @@ function App() {
           <div className="row">
             <div className="col-12 col-lg-6">
               <div className="image-boder">
-                <img id='my-image' src={me} alt="" />
+                <img id='my-image' src={mee} alt="" />
               </div>
             </div>
             <motion.div   variants={staggerContainer} 

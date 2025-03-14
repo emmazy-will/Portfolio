@@ -118,8 +118,8 @@ body {
   margin-top: 80px;
 }
 #my-image{
-  height: 300px;
-  margin-top: 30px;
+  height: 230px;
+  margin-top: 50px;
   margin-left: 60px;
 }
 @keyframes borderColorChange {
@@ -502,7 +502,7 @@ i {
   }
   .image-boder{
     border: 15px solid rgb(225, 255, 0);
-    width: 20%;
+    width: 60%;
     margin-top: 50px;
     height: 80%;
     animation: borderColorChange 4s infinite;
