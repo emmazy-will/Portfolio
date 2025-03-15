@@ -441,13 +441,13 @@ function App() {
               <h5>Contact Me</h5>
               <div className="d-flex flex-column gap-2 align-items-center align-items-md-start">
                 <div className="d-flex align-items-center gap-2">
-                  <Mail size={16} /> <span>youremail@example.com</span>
+                  <Mail size={16} /> <span>emmanuelazubuogu24@gmail.com</span>
                 </div>
                 <div className="d-flex align-items-center gap-2">
-                  <Phone size={16} /> <span>+123 456 7890</span>
+                  <Phone size={16} /> <span>=234-9134857341 or +234-8105823784</span>
                 </div>
                 <div className="d-flex align-items-center gap-2">
-                  <MapPin size={16} /> <span>Your City, Country</span>
+                  <MapPin size={16} /> <span>Aba ariria, Nigeria</span>
                 </div>
               </div>
             </div>
@@ -469,7 +469,7 @@ function App() {
             </div>
           </div>
           <hr className="border-light" />
-          <p className="mb-0">&copy; {new Date().getFullYear()} Your Name. All Rights Reserved.</p>
+          <p className="mb-0">&copy; {new Date().getFullYear()} EmmanuelAzubuogu. All Rights Reserved.</p>
         </div>
       </footer>
     </div>
