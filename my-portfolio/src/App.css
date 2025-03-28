@@ -504,6 +504,7 @@ i {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
 }
 
+
 @media (max-width: 768px) {
   .one-pro {
     width: 90%;
@@ -521,10 +522,10 @@ i {
   }
   .image-boder{
     border: 15px solid blue;
-    width: 70%;
+    width: 250px;
     margin-top: 50px;
-    height: 80%;
-    border-radius: 12px;
+    height: 250px;
+    border-radius: 50%;
     animation: borderColorChange 4s infinite;
   }
   #contact {
