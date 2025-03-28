@@ -119,8 +119,9 @@ body {
 }
 #my-image{
   height: 230px;
-  margin-top: 50px;
+  margin-top: 30px;
   margin-left: 60px;
+  border-radius: 50%;
 }
 @keyframes borderColorChange {
   0% { border-color: rgb(37, 75, 156); }
@@ -131,10 +132,11 @@ body {
 }
 .image-boder{
   border: 15px solid blue;
-  width: 42%;
+  width: 250px;
   margin-top: 50px;
-  height: 80%;
+  height: 250px;
   animation: borderColorChange 4s infinite;
+  border-radius: 50%;
 }
 .about-me{
   margin-top: 150px;
