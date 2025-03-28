@@ -1,9 +1,11 @@
 import { Menu, ArrowRight, Mail, Phone, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import mee from "./images/me.jpg";
-import view from "./images/row.png";
-import manage from "./images/task.png";
+// Update your imports to use the new aliases
+import mee from "src/images/me.jpg";
+import view from "src/images/row.png";
+import manage from "src/images/task.png";
+import book from "src/images/books.png";
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -514,7 +516,95 @@ function App() {
           </div>
         </div>
       </motion.section>
-
+      {/* Project 2 with different animation */}
+        {/* Project 3 - Foodie Website */}
+<motion.section
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, margin: "-100px" }}
+  variants={staggerContainer}
+>
+  <div className="container">
+    <div className="row">
+      {/* Text content */}
+      <motion.div 
+        className="col-12 col-lg-6 order-2 order-md-2"
+        variants={{
+          hidden: { opacity: 0, y: 50 },
+          visible: { 
+            opacity: 1, 
+            y: 0,
+            transition: { 
+              duration: 0.8,
+              type: "spring",
+              bounce: 0.4
+            }
+          }
+        }}
+      >
+        <motion.div 
+          className="card-two mt-5"
+          whileHover={{
+            scale: 1.02,
+            boxShadow: "0 10px 25px rgba(0, 123, 255, 0.2)"
+          }}
+          transition={{ type: "spring", stiffness: 200 }}
+        >
+          <motion.h6 animate={textGlow}>
+            Project-3
+          </motion.h6>
+          <motion.p>
+          "Page Turner is your gateway to endless stories and knowledge treasures. 📖💎
+          Browse curated collections, find your next favorite read, and get lost in wonderful worlds. 🌈📚
+          Expand your horizons—one book at a time! ✨🧠"
+          </motion.p>
+          <motion.a 
+            href="https://books-store-lemon.vercel.app" 
+            className="text-primary d-flex align-items-center"
+            whileHover={{ x: 5 }}
+          >
+            <span className="me-2">View More</span>
+            <ArrowRight size={12}/>
+          </motion.a>
+        </motion.div>
+      </motion.div>
+      
+      {/* Image */}
+      <motion.div 
+        className="col-12 col-lg-6 order-3 order-md-3 text-end"
+        variants={{
+          hidden: { opacity: 0, x: 100, rotate: 15 },
+          visible: { 
+            opacity: 1, 
+            x: 0, 
+            rotate: 0,
+            transition: { 
+              duration: 0.8,
+              type: "spring",
+              bounce: 0.4,
+              delay: 0.2
+            }
+          }
+        }}
+        whileHover={{ scale: 1.05 }}
+      >
+       <div className="one-pro text-center"> {/* Added text-center for alignment */}
+  <motion.img 
+    id='pro-four'
+    src={book}
+    className="project-image" // Custom class
+    alt="Foodie application screenshot"
+    animate={floatingAnimation}
+    onError={(e) => {
+      e.target.onerror = null;
+      e.target.src = "/placeholder-food.png"
+    }}
+  />
+</div>
+      </motion.div>
+    </div>
+  </div>
+</motion.section>
       {/* Services Section with card animations */}
       <motion.section 
         className="container text-center my-5"
