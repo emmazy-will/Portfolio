@@ -1,4 +1,4 @@
-import { Menu, ArrowRight, Mail, Phone, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
+import { Menu, ArrowRight, Mail, Phone, MapPin, Linkedin, Github, Twitter, Instagram, Facebook } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 // Update your imports to use the new aliases
@@ -396,7 +396,7 @@ function App() {
                   "A stock tracker is a tool that monitors real-time stock market data, helping users stay updated on price changes, trends, and market performance. It allows you to track specific stocks, view historical data, and analyze key metrics. With intuitive charts and alerts, it makes following the market simple and accessible. Whether you're an investor or just curious, a stock tracker keeps you informed at a glance."
                 </motion.p>
                 <motion.a 
-                  href="https://track-dashboard-t7iy.onrender.com/" 
+                  href="https://crypto-stock-tracker.onrender.com" 
                   className="text-primary d-flex align-items-center"
                   whileHover={{ x: 5 }}
                 >
@@ -983,7 +983,16 @@ function App() {
                   <Github size={24} />
                 </motion.a>
                 <motion.a 
-                  href="https://linkedin.com/in/yourusername" 
+                  href="https://x.com/Emmanuelwizspa?t=EV7-7mtxg9-oKI6QlYNFyg&s=09" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-white"
+                  whileHover={{ scale: 1.2, color: "#007bff" }}
+                >
+                  <Twitter size={24} />
+                </motion.a>
+                <motion.a 
+                  href="https://www.linkedin.com/in/azubuogu-emmanuel-639491357?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="text-white"
@@ -992,13 +1001,22 @@ function App() {
                   <Linkedin size={24} />
                 </motion.a>
                 <motion.a 
-                  href="https://twitter.com/yourusername" 
+                  href="https://www.instagram.com/emmanuel_wizspark?igsh=MTR6dDIwNHEwODRkMA==&utm_source=ig_contact_invite" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="text-white"
                   whileHover={{ scale: 1.2, color: "#007bff" }}
                 >
-                  <Twitter size={24} />
+                  <Instagram size={24} />
+                </motion.a>
+                <motion.a 
+                  href="https://www.facebook.com/profile.php?id=61574836145600" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-white"
+                  whileHover={{ scale: 1.2, color: "#007bff" }}
+                >
+                  <Facebook size={24} />
                 </motion.a>
               </div>
             </motion.div>
