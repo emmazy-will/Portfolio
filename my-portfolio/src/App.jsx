@@ -1,14 +1,18 @@
-import { Menu, ArrowRight, Mail, Phone, MapPin, Linkedin, Github, Twitter, Instagram, Facebook } from 'lucide-react';
+import { Menu, ArrowRight, Mail, Phone, MapPin, Linkedin, Github, Twitter, Instagram, Facebook, Share2 } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-// Update your imports to use the new aliases
 import mee from "src/images/me.jpg";
-import view from "src/images/row.png";
+import view from "src/images/stock-tracker.png";
 import manage from "src/images/task.png";
 import book from "src/images/books.png";
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import meal from "/src/images/foodie.png"
+import company from "/src/images/qnb.png"
+import off from "/src/images/shop.png"
+import chat from "/src/images/chat-app.png"
+import chatt from "/src/images/chat-bot.png"
 
 // Particle background component
 const Particles = () => {
@@ -38,6 +42,146 @@ const Particles = () => {
   );
 };
 
+// Share component
+const ShareProject = ({ url, title }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+
+  const shareOptions = [
+    {
+      name: 'Twitter',
+      icon: <Twitter size={16} />,
+      url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(`Check out this project: ${title}`)}`
+    },
+    {
+      name: 'LinkedIn',
+      icon: <Linkedin size={16} />,
+      url: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`
+    },
+    {
+      name: 'Facebook',
+      icon: <Facebook size={16} />,
+      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+    }
+  ];
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(url);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+  };
+
+  return (
+    <div className="share-container">
+      <motion.button
+        className="share-button"
+        onClick={() => setIsOpen(!isOpen)}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <Share2 size={16} />
+        <span>Share</span>
+      </motion.button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="share-dropdown"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+          >
+            {shareOptions.map((option, index) => (
+              <motion.a
+                key={index}
+                href={option.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="share-option"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                {option.icon}
+                <span>{option.name}</span>
+              </motion.a>
+            ))}
+            <motion.button
+              className="share-option"
+              onClick={copyToClipboard}
+              whileHover={{ x: 5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <span>{isCopied ? 'Copied!' : 'Copy Link'}</span>
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+// Project Card Component
+const ProjectCard = ({ project }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  return (
+    <motion.div 
+      className="project-card"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6 }}
+      whileHover={{ scale: 1.03 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+    >
+      <div className="project-image-container">
+        <motion.img 
+          src={project.image} 
+          alt={project.title}
+          animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
+          transition={{ duration: 0.3 }}
+        />
+        <motion.div 
+          className="project-overlay"
+          initial={{ opacity: 0 }}
+          animate={isHovered ? { opacity: 1 } : { opacity: 0 }}
+        >
+          <div className="project-tech">
+            {project.tech.map((tech, index) => (
+              <span key={index}>{tech}</span>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+      
+      <div className="project-content">
+        <h3>{project.title}</h3>
+        <p>{project.description}</p>
+        
+        <div className="project-actions">
+          <motion.a 
+            href={project.url} 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="view-button"
+            whileHover={{ x: 5 }}
+          >
+            <span>View Project</span>
+            <ArrowRight size={14} />
+          </motion.a>
+          
+          <ShareProject 
+            url={project.url} 
+            title={project.title} 
+          />
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const controls = useAnimation();
@@ -48,6 +192,66 @@ function App() {
       controls.start("visible");
     }
   }, [controls, inView]);
+
+  // Projects data
+  const projects = [
+    {
+      title: "Stock Tracker",
+      description: "A stock tracker that monitors real-time stock market data, helping users stay updated on price changes, trends, and market performance.",
+      image: view,
+      url: "https://crypto-stock-tracker.onrender.com",
+      tech: ["React", "API", "Chart.js","css"]
+    },
+    {
+      title: "Task Manager",
+      description: "A task management website that helps users organize, track, and prioritize tasks efficiently with features like search and categorization.",
+      image: manage,
+      url: "https://task-app-oinc.onrender.com",
+      tech: ["React", "Firebase", "Tailwind"]
+    },
+    {
+      title: "Book Store",
+      description: "An online bookstore with curated collections and easy browsing to help users find their next favorite read.",
+      image: book,
+      url: "https://books-store-lemon.vercel.app",
+      tech: ["React", "Vite", "CSS",]
+    },
+    {
+      title: "Big Foodie",
+      description: "A lively spot serving bold flavors and big portions, Big Foodie satisfies every comfort food craving.",
+      image: meal,
+      url: "https://bigfoodie.onrender.com",
+      tech: ["React", "Vite", "CSS",]
+    },
+    {
+      title: "Q..N.B company",
+      description: "A reliable shipping company, QNB delivers fast, secure, and seamless logistics for businesses and individuals worldwide.",
+      image: company,
+      url: "https://q-n-b-group.onrender.com",
+      tech: ["React", "Vite", "CSS","Render","Javascript"]
+    },
+    {
+      title: "Shop Off",
+      description: "A beauty haven, Shop Off offers top cosmetic brands at unbeatable prices, making glam accessible for everyone.",
+      image: off,
+      url: "https://shop-off.onrender.com",
+      tech: ["React", "Vite", "CSS","render","Javascripit"]
+    },
+    {
+      title: "Wizchat",
+      description: "WizChatApp is a smart, seamless messaging platform designed for fast, secure, and fun conversations anytime, anywhere.",
+      image: chat,
+      url: "https://chat-app-u3ah.onrender.com",
+      tech: ["React", "Vite", "CSS","render","Javascripit"]
+    },
+    {
+      title: "LexiAi",
+      description: "LexiAI is an intelligent chatbot that delivers quick, thoughtful, and human-like responses to simplify your digital interactions.",
+      image: chatt,
+      url: "https://chat-bot-ldvh.onrender.com",
+      tech: ["React", "Vite", "CSS","render","Javascripit","Api","Typescript"]
+    }
+  ];
 
   // Animation variants
   const fadeInUp = {
@@ -168,7 +372,7 @@ function App() {
               animate="visible"
             >
               <motion.ul className="nav-list">
-                {["ABOUT", "SKILLS", "PROJECT", "CONTACT"].map((item, index) => (
+                {["ABOUT", "SKILLS", "PROJECTS", "CONTACT"].map((item, index) => (
                   <motion.li
                     key={index}
                     variants={{
@@ -224,7 +428,7 @@ function App() {
             transition={{ duration: 0.3 }}
           >
             <ul className="nav-list">
-              {["ABOUT", "SKILLS", "PROJECT", "CONTACT"].map((item, index) => (
+              {["ABOUT", "SKILLS", "PROJECTS", "CONTACT"].map((item, index) => (
                 <motion.li
                   key={index}
                   initial={{ opacity: 0, x: -20 }}
@@ -232,7 +436,9 @@ function App() {
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.05 }}
                 >
-                  <a href={`#${item.toLowerCase()}`}>{item}</a>
+                  <a href={`#${item.toLowerCase()}`} onClick={() => setIsMobileMenuOpen(false)}>
+                    {item}
+                  </a>
                 </motion.li>
               ))}
             </ul>
@@ -338,273 +544,32 @@ function App() {
         </div>
       </motion.section>
 
-      {/* Projects Section with 3D tilt effect */}
-      <motion.section
+      {/* Projects Section with Grid Layout */}
+      <motion.section 
+        id="projects"
+        className="projects-section"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.5 }}
+        viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.8 }}
       >
-        <motion.div 
-          className="my-project"
-          animate={textGlow}
-        >
-          <h4>My Projects</h4>
-        </motion.div>
-      </motion.section>
-
-      {/* Project 1 with advanced animations */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
-      >
         <div className="container">
-          <div className="row">
-            <motion.div 
-              className="col-12 col-lg-6"
-              id='project'
-              variants={{
-                hidden: { opacity: 0, y: 50 },
-                visible: { 
-                  opacity: 1, 
-                  y: 0,
-                  transition: { 
-                    duration: 0.8,
-                    type: "spring",
-                    bounce: 0.4
-                  }
-                }
-              }}
-            >
-              <motion.div 
-                className="mt-5" 
-                id='card-one'
-                whileHover={{
-                  scale: 1.02,
-                  boxShadow: "0 10px 25px rgba(0, 123, 255, 0.2)"
-                }}
-                transition={{ type: "spring", stiffness: 200 }}
-              >
-                <motion.h6
-                  animate={textGlow}
-                >
-                  Project-1
-                </motion.h6>
-                <motion.p>
-                  "A stock tracker is a tool that monitors real-time stock market data, helping users stay updated on price changes, trends, and market performance. It allows you to track specific stocks, view historical data, and analyze key metrics. With intuitive charts and alerts, it makes following the market simple and accessible. Whether you're an investor or just curious, a stock tracker keeps you informed at a glance."
-                </motion.p>
-                <motion.a 
-                  href="https://crypto-stock-tracker.onrender.com" 
-                  className="text-primary d-flex align-items-center"
-                  whileHover={{ x: 5 }}
-                >
-                  <span className="me-2">View More</span>
-                  <ArrowRight size={12} />
-                </motion.a>
-              </motion.div>
-            </motion.div>
-            
-            <motion.div 
-              className="one-pr"
-              variants={{
-                hidden: { opacity: 0, x: 100, rotate: 15 },
-                visible: { 
-                  opacity: 1, 
-                  x: 0, 
-                  rotate: 0,
-                  transition: { 
-                    duration: 0.8,
-                    type: "spring",
-                    bounce: 0.4,
-                    delay: 0.2
-                  }
-                }
-              }}
-              whileHover={{ scale: 1.05 }}
-            >
-              <motion.img 
-                id='pro-one' 
-                src={view} 
-                alt=""
-                animate={floatingAnimation}
-              />
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Project 2 with different animation */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
-      >
-        <div className="container">
-          <div className="row">
-            <motion.div 
-              className="col-12 col-lg-6 order-2 order-md-1 text-end"
-              variants={{
-                hidden: { opacity: 0, x: -100, rotate: -15 },
-                visible: { 
-                  opacity: 1, 
-                  x: 0, 
-                  rotate: 0,
-                  transition: { 
-                    duration: 0.8,
-                    type: "spring",
-                    bounce: 0.4,
-                    delay: 0.2
-                  }
-                }
-              }}
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="one-pro">
-                <motion.img 
-                  id='pro-two' 
-                  src={manage} 
-                  alt=""
-                  animate={floatingAnimation}
-                />
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              className="col-12 col-lg-6 order-1 order-md-2"
-              variants={{
-                hidden: { opacity: 0, y: 50 },
-                visible: { 
-                  opacity: 1, 
-                  y: 0,
-                  transition: { 
-                    duration: 0.8,
-                    type: "spring",
-                    bounce: 0.4
-                  }
-                }
-              }}
-            >
-              <motion.div 
-                className="card-two mt-5"
-                whileHover={{
-                  scale: 1.02,
-                  boxShadow: "0 10px 25px rgba(0, 123, 255, 0.2)"
-                }}
-                transition={{ type: "spring", stiffness: 200 }}
-              >
-                <motion.h6
-                  animate={textGlow}
-                >
-                  Project-2
-                </motion.h6>
-                <motion.p>
-                  A task management website helps users organize, track, and prioritize tasks efficiently. It offers features like task creation, search, and categorization, ensuring seamless productivity. The responsive design adapts to any device, enhancing accessibility and ease of use.
-                </motion.p>
-                <motion.a 
-                  href="https://task-app-oinc.onrender.com" 
-                  className="text-primary d-flex align-items-center"
-                  whileHover={{ x: 5 }}
-                >
-                  <span className="me-2">View More</span>
-                  <ArrowRight size={12}/>
-                </motion.a>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
-      {/* Project 2 with different animation */}
-        {/* Project 3 - Foodie Website */}
-<motion.section
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true, margin: "-100px" }}
-  variants={staggerContainer}
->
-  <div className="container">
-    <div className="row">
-      {/* Text content */}
-      <motion.div 
-        className="col-12 col-lg-6 order-2 order-md-2"
-        variants={{
-          hidden: { opacity: 0, y: 50 },
-          visible: { 
-            opacity: 1, 
-            y: 0,
-            transition: { 
-              duration: 0.8,
-              type: "spring",
-              bounce: 0.4
-            }
-          }
-        }}
-      >
-        <motion.div 
-          className="card-two mt-5"
-          whileHover={{
-            scale: 1.02,
-            boxShadow: "0 10px 25px rgba(0, 123, 255, 0.2)"
-          }}
-          transition={{ type: "spring", stiffness: 200 }}
-        >
-          <motion.h6 animate={textGlow}>
-            Project-3
-          </motion.h6>
-          <motion.p>
-          "Page Turner is your gateway to endless stories and knowledge treasures. 📖💎
-          Browse curated collections, find your next favorite read, and get lost in wonderful worlds. 🌈📚
-          Expand your horizons—one book at a time! ✨🧠"
-          </motion.p>
-          <motion.a 
-            href="https://books-store-lemon.vercel.app" 
-            className="text-primary d-flex align-items-center"
-            whileHover={{ x: 5 }}
+          <motion.div 
+            className="section-header"
+            animate={textGlow}
           >
-            <span className="me-2">View More</span>
-            <ArrowRight size={12}/>
-          </motion.a>
-        </motion.div>
-      </motion.div>
-      
-      {/* Image */}
-      <motion.div 
-        className="col-12 col-lg-6 order-3 order-md-3 text-end"
-        variants={{
-          hidden: { opacity: 0, x: 100, rotate: 15 },
-          visible: { 
-            opacity: 1, 
-            x: 0, 
-            rotate: 0,
-            transition: { 
-              duration: 0.8,
-              type: "spring",
-              bounce: 0.4,
-              delay: 0.2
-            }
-          }
-        }}
-        whileHover={{ scale: 1.05 }}
-      >
-       <div className="one-pro text-center"> {/* Added text-center for alignment */}
-  <motion.img 
-    id='pro-four'
-    src={book}
-    className="project-image" // Custom class
-    alt="Foodie application screenshot"
-    animate={floatingAnimation}
-    onError={(e) => {
-      e.target.onerror = null;
-      e.target.src = "/placeholder-food.png"
-    }}
-  />
-</div>
-      </motion.div>
-    </div>
-  </div>
-</motion.section>
+            <h2>My Projects</h2>
+            <p>Here are some of my recent works</p>
+          </motion.div>
+
+          <div className="projects-grid">
+            {projects.map((project, index) => (
+              <ProjectCard key={index} project={project} />
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
       {/* Services Section with card animations */}
       <motion.section 
         className="container text-center my-5"
@@ -770,12 +735,13 @@ function App() {
               className="col-6 col-md-3 mb-4 text-center" 
               variants={cardVariants}
               whileHover={{ scale: 1.1 }}
+              style={{height:'170px'}}
             >
               <motion.div 
                 className="card p-3"
                 animate={floatingAnimation}
               >
-                <img id='vit' src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" />
+                <img id='vit' src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" alt="Vite" style={{height:'70px'}}/>
                 <h5>Vite</h5>
               </motion.div>
             </motion.div>
@@ -785,12 +751,13 @@ function App() {
               className="col-6 col-md-3 mb-4 text-center" 
               variants={cardVariants}
               whileHover={{ scale: 1.1 }}
+              style={{height:'170px'}}
             >
               <motion.div 
                 className="card p-3"
                 animate={floatingAnimation}
               >
-                <img id='git' src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg" />
+                <img id='git' src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg" alt="GitHub" style={{height:'70px'}}/>
                 <h5>GitHub</h5>
               </motion.div>
             </motion.div>
@@ -800,12 +767,13 @@ function App() {
               className="col-6 col-md-3 mb-4 text-center" 
               variants={cardVariants}
               whileHover={{ scale: 1.1 }}
+              style={{height:'170px'}}
             >
               <motion.div 
                 className="card p-3"
                 animate={floatingAnimation}
               >
-                <img id='net' src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/netlify/netlify-original-wordmark.svg" />
+                <img id='net' src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/netlify/netlify-original-wordmark.svg" alt="Netlify" style={{height:'70px'}}/>
                 <h5>Netlify</h5>
               </motion.div>
             </motion.div>
@@ -815,12 +783,13 @@ function App() {
               className="col-6 col-md-3 mb-4 text-center" 
               variants={cardVariants}
               whileHover={{ scale: 1.1 }}
+              style={{height:'170px'}}
             >
               <motion.div 
                 className="card p-3"
                 animate={floatingAnimation}
               >
-                <img id='fire' src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg" />
+                <img id='fire' src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg" alt="Firebase" style={{height:'70px'}}/>
                 <h5>Firebase</h5>
               </motion.div>
             </motion.div>
@@ -859,13 +828,13 @@ function App() {
               <h4>Get in Touch</h4>
               <p className="text">Feel free to reach out for collaborations or just a friendly hello!</p>
               <div className="d-flex align-items-center mb-3">
-                <Mail className="me-2" /> <span>youremail@example.com</span>
+                <Mail className="me-2" /> <span>emmanuelazubuogu24@gmail.com</span>
               </div>
               <div className="d-flex align-items-center mb-3">
-                <Phone className="me-2" /> <span>+123 456 7890</span>
+                <Phone className="me-2" /> <span>+234-9134857341 or +234-8105823784</span>
               </div>
               <div className="d-flex align-items-center">
-                <MapPin className="me-2" /> <span>Your City, Country</span>
+                <MapPin className="me-2" /> <span>Aba ariria, Nigeria</span>
               </div>
             </motion.div>
           </motion.div>
@@ -956,7 +925,7 @@ function App() {
                   <Mail size={16} /> <span>emmanuelazubuogu24@gmail.com</span>
                 </div>
                 <div className="d-flex align-items-center gap-2">
-                  <Phone size={16} /> <span>=234-9134857341 or +234-8105823784</span>
+                  <Phone size={16} /> <span>+234-9134857341 or +234-8105823784</span>
                 </div>
                 <div className="d-flex align-items-center gap-2">
                   <MapPin size={16} /> <span>Aba ariria, Nigeria</span>
