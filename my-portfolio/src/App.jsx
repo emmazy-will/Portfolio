@@ -1,4 +1,4 @@
-import { Menu, ArrowRight, Mail, Phone, MapPin, Linkedin, Github, Twitter, Instagram, Facebook, Share2 } from 'lucide-react';
+import { Menu, ArrowRight, Mail, Phone, MapPin, Linkedin, Github, Twitter, Instagram, Facebook, Share2, School } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import mee from "src/images/me.jpg";
@@ -13,6 +13,7 @@ import company from "/src/images/qnb.png"
 import off from "/src/images/shop.png"
 import chat from "/src/images/chat-app.png"
 import chatt from "/src/images/chat-bot.png"
+import Schoolweb from "/src/images/school.png"
 
 // Particle background component
 const Particles = () => {
@@ -207,50 +208,57 @@ function App() {
       description: "A task management website that helps users organize, track, and prioritize tasks efficiently with features like search and categorization.",
       image: manage,
       url: "https://task-app-oinc.onrender.com",
-      tech: ["React", "Firebase", "Tailwind"]
+      tech: ["React", "Firebase", "Tailwind","bootstrap"]
     },
     {
       title: "Book Store",
       description: "An online bookstore with curated collections and easy browsing to help users find their next favorite read.",
       image: book,
       url: "https://books-store-lemon.vercel.app",
-      tech: ["React", "Vite", "CSS",]
+      tech: ["React", "Vite", "CSS","bootstrap"]
     },
     {
       title: "Big Foodie",
       description: "A lively spot serving bold flavors and big portions, Big Foodie satisfies every comfort food craving.",
       image: meal,
       url: "https://bigfoodie.onrender.com",
-      tech: ["React", "Vite", "CSS",]
+      tech: ["React", "Vite", "CSS","boostrap"]
     },
     {
       title: "Q..N.B company",
       description: "A reliable shipping company, QNB delivers fast, secure, and seamless logistics for businesses and individuals worldwide.",
       image: company,
       url: "https://q-n-b-group.onrender.com",
-      tech: ["React", "Vite", "CSS","Render","Javascript"]
+      tech: ["React", "Vite", "CSS","Render","Javascript","bootstrap"]
     },
     {
       title: "Shop Off",
       description: "A beauty haven, Shop Off offers top cosmetic brands at unbeatable prices, making glam accessible for everyone.",
       image: off,
       url: "https://shop-off.onrender.com",
-      tech: ["React", "Vite", "CSS","render","Javascripit"]
+      tech: ["React", "Vite", "CSS","render","Javascripit","bootstrap"]
     },
     {
       title: "Wizchat",
       description: "WizChatApp is a smart, seamless messaging platform designed for fast, secure, and fun conversations anytime, anywhere.",
       image: chat,
       url: "https://chat-app-u3ah.onrender.com",
-      tech: ["React", "Vite", "CSS","render","Javascripit"]
+      tech: ["React", "Vite", "CSS","render","Javascripit","bootstrap"]
     },
     {
       title: "LexiAi",
       description: "LexiAI is an intelligent chatbot that delivers quick, thoughtful, and human-like responses to simplify your digital interactions.",
       image: chatt,
       url: "https://chat-bot-ldvh.onrender.com",
-      tech: ["React", "Vite", "CSS","render","Javascripit","Api","Typescript"]
-    }
+      tech: ["React", "Vite", "CSS","render","Javascripit","Api","Typescript","bootstrap"]
+    },
+    {
+      title: "Dehills international academy",
+      description: "Where academic excellence meets character development.A nurturing environment that inspires curiosity and confidence.Preparing visionary leaders through innovative education.",
+      image: Schoolweb,
+      url: "https://chat-bot-ldvh.onrender.com",
+      tech: ["Html", "CSS","render","Javascripit",]
+    },
   ];
 
   // Animation variants
