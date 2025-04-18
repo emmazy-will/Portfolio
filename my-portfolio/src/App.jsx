@@ -256,7 +256,7 @@ function App() {
       title: "Dehills international academy",
       description: "Where academic excellence meets character development.A nurturing environment that inspires curiosity and confidence.Preparing visionary leaders through innovative education.",
       image: Schoolweb,
-      url: "https://chat-bot-ldvh.onrender.com",
+      url: "https://school-3ki2.onrender.com",
       tech: ["Html", "CSS","render","Javascripit",]
     },
   ];
