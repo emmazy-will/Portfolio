@@ -241,7 +241,7 @@
      {
       title: "WeatherPro",
       description: "WeatherPro is a sleek, real-time weather application that delivers accurate forecasts with an intuitive interface. Get instant updates on temperature, precipitation, wind, and severe weather alerts for any location.",
-      image: weather,
+      image: chat,
       url: "https://my-wether-app-qvjd.onrender.com",
       tech: ["React", "CSS", "OpenWeather API", "Vite", "JavaScript", "Geolocation API"]
     },
