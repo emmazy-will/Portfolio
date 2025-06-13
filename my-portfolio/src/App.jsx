@@ -253,7 +253,7 @@ const projects = [
     title: "LexiAi",
     description: "LexiAI is an intelligent chatbot that delivers quick, thoughtful, and human-like responses to simplify your digital interactions.",
     image: chatt,
-    url: "https://lexiai-voice-controlled-app.onrender.com,
+    url: "https://lexiai-voice-controlled-app.onrender.com",
     tech: ["React", "Vite", "CSS","render","Javascripit","Api","Typescript","bootstrap"]
   },
   {
